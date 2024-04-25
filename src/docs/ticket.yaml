@@ -1,0 +1,115 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: 'API de Gestión de Tickets'
+paths:
+  /getTicket:
+    get:
+      summary: Obtener todos los tickets
+      tags:
+        - Tickets
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Lista de tickets obtenida exitosamente
+        '400':
+          description: Error al recuperar los tickets o error de servidor
+        '500':
+          description: Error interno del servidor
+
+  /getTicketId/{id}:
+    get:
+      summary: Obtener un ticket por ID
+      tags:
+        - Tickets
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del ticket a obtener
+          type: string
+      responses:
+        '200':
+          description: Ticket obtenido exitosamente
+        '400':
+          description: Ticket no encontrado o error de servidor
+        '500':
+          description: Error interno del servidor
+
+  /purchase/{cid}:
+    post:
+      summary: Realizar una compra con el carrito especificado
+      tags:
+        - Tickets
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito para realizar la compra
+          type: string
+      responses:
+        '200':
+          description: Compra realizada exitosamente
+        '400':
+          description: No se pudo completar la compra debido a falta de stock o error de servidor
+        '500':
+          description: Error interno del servidor
+
+  /deleteTicket/{id}:
+    delete:
+      summary: Eliminar un ticket por ID
+      tags:
+        - Tickets
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del ticket a eliminar
+          type: string
+      responses:
+        '200':
+          description: Ticket eliminado exitosamente
+        '500':
+          description: Error interno del servidor
+
+definitions:
+  Ticket:
+    type: object
+    properties:
+      user:
+        type: string
+      products:
+        type: array
+        items:
+          $ref: '#/definitions/CartProduct'
+      amount:
+        type: number
+
+  CartProduct:
+    type: object
+    properties:
+      pid:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      price:
+        type: number
+      quantity:
+        type: integer
+      total:
+        type: number
+
+securityDefinitions:
+  BearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header

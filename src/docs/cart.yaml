@@ -1,0 +1,138 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: 'API de Gestión de Carrito'
+paths:
+  /getCart:
+    get:
+      summary: Obtener el contenido del carrito
+      tags:
+        - Carrito
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Contenido del carrito obtenido exitosamente
+        '400':
+          description: No hay productos en el carrito o error de servidor
+        '500':
+          description: Error interno del servidor
+
+  /getCartByid/{id}:
+    get:
+      summary: Obtener un producto específico del carrito por ID
+      tags:
+        - Carrito
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del producto en el carrito a obtener
+          type: string
+      responses:
+        '200':
+          description: Producto del carrito obtenido exitosamente
+        '400':
+          description: Producto no encontrado en el carrito o error de servidor
+        '500':
+          description: Error interno del servidor
+
+  /deleteCart/{id}:
+    delete:
+      summary: Eliminar un producto del carrito por ID
+      tags:
+        - Carrito
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del producto en el carrito a eliminar
+          type: string
+      responses:
+        '200':
+          description: Producto eliminado del carrito exitosamente
+        '400':
+          description: Producto no encontrado en el carrito o error de servidor
+        '500':
+          description: Error interno del servidor
+
+  /updateCart/{cid}/{pid}:
+    put:
+      summary: Actualizar la cantidad de un producto en el carrito
+      tags:
+        - Carrito
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: ID del carrito
+          type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto en el carrito a actualizar
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                  minimum: 1
+                  default: 1
+              required:
+                - quantity
+      responses:
+        '200':
+          description: Cantidad del producto en el carrito actualizada exitosamente
+        '400':
+          description: Producto no encontrado en el carrito o error de servidor
+        '500':
+          description: Error interno del servidor
+
+  /newCart:
+    post:
+      summary: Crear un nuevo carrito para el usuario
+      tags:
+        - Carrito
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Carrito creado exitosamente
+        '400':
+          description: Error al crear el carrito o error de servidor
+        '500':
+          description: Error interno del servidor
+
+definitions:
+  CartProduct:
+    type: object
+    properties:
+      _id:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      price:
+        type: number
+      quantity:
+        type: integer
+      total:
+        type: number
+
+securityDefinitions:
+  BearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header

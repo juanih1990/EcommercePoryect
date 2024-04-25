@@ -1,0 +1,171 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: 'API de Gestión de Productos'
+paths:
+  /addProduct:
+    post:
+      summary: Agregar un nuevo producto
+      tags:
+        - Productos
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/ProductInput'
+      responses:
+        '200':
+          description: Producto agregado exitosamente
+        '400':
+          description: El producto ya existe o datos inválidos
+        '500':
+          description: Error interno del servidor
+
+  /getProduct/{limit}/{page}:
+    get:
+      summary: Obtener lista de productos paginada
+      tags:
+        - Productos
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: limit
+          in: path
+          required: true
+          description: Número máximo de productos por página
+          type: integer
+        - name: page
+          in: path
+          required: true
+          description: Número de página
+          type: integer
+      responses:
+        '200':
+          description: Lista de productos obtenida exitosamente
+        '400':
+          description: No se encontraron productos o parámetros inválidos
+        '500':
+          description: Error interno del servidor
+
+  /getProductByid/{id}:
+    get:
+      summary: Obtener un producto por ID
+      tags:
+        - Productos
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del producto a obtener
+          type: string
+      responses:
+        '200':
+          description: Producto encontrado exitosamente
+        '400':
+          description: Producto no encontrado
+        '500':
+          description: Error interno del servidor
+
+  /deleteProduct/{id}:
+    delete:
+      summary: Eliminar un producto por ID
+      tags:
+        - Productos
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del producto a eliminar
+          type: string
+      responses:
+        '200':
+          description: Producto eliminado exitosamente
+        '500':
+          description: Error interno del servidor
+
+  /updateProduct/{id}:
+    put:
+      summary: Actualizar un producto por ID
+      tags:
+        - Productos
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del producto a actualizar
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/ProductUpdate'
+      responses:
+        '200':
+          description: Producto actualizado exitosamente
+        '400':
+          description: Producto no encontrado o datos inválidos
+        '500':
+          description: Error interno del servidor
+
+definitions:
+  ProductInput:
+    type: object
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      price:
+        type: number
+      stock:
+        type: integer
+      category:
+        type: string
+      code:
+        type: string
+      thumbnail:
+        type: string
+    required:
+      - title
+      - price
+      - stock
+      - category
+      - code
+
+  ProductUpdate:
+    type: object
+    properties:
+      title:
+        type: string
+      description:
+        type: string
+      price:
+        type: number
+      stock:
+        type: integer
+      category:
+        type: string
+      thumbnail:
+        type: string
+    required:
+      - title
+      - price
+      - stock
+      - category
+      - thumbnail
+
+securityDefinitions:
+  BearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
