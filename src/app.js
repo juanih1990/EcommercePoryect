@@ -9,9 +9,12 @@ import cookieParser from 'cookie-parser'
 import swaggerJSDoc from 'swagger-jsdoc'
 import SwaggerUiExpress from 'swagger-ui-express'
 import { addlogger } from './logger/logger.js'
+import cors from 'cors'
 
 const app = express()
 
+//agrego cors 
+app.use(cors())
 //para que acepte formato json.
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

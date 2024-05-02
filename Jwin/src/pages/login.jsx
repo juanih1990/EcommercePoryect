@@ -15,8 +15,12 @@ const Login = () => {
                 <TextField id="outlined-basic" label="password" variant="outlined" fullWidth sx={{ mt: 2.5, mb: 2.5 }} />
                 <Button sx={{ mt: 1.5, mb: 1.5 }} variant="contained" fullWidth>Login</Button>
                 <Box component="div" sx={{ display: 'flex', justifyContent: 'space-between', mt: 1, mb: 1 }}>
-                    <Link to="/register" ><MuyLink sx={{ mt: 1, mb: 1, cursor: 'pointer' }}>olvide mi contraseña</MuyLink></Link>
-                    <Link to="/register" > <MuyLink sx={{ mt: 1, mb: 1, cursor: 'pointer' }}>no tienes cuenta? registrate aqui</MuyLink></Link>
+                    <Link to="/#" >
+                        <Typography component='span' sx={{ mt: 1, mb: 1, cursor: 'pointer' , color: 'blue' , textDecoration: 'none' }}>olvide mi contraseña</Typography>
+                    </Link>
+                    <Link to="/register" >
+                        <Typography component='span' sx={{ mt: 1, mb: 1, cursor: 'pointer' , color: 'blue' , textDecoration: 'none' }}>no tienes cuenta? registrate aqui</Typography>
+                    </Link>
                 </Box>
             </Box>
         </Container>

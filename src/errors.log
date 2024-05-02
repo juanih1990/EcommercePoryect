@@ -1,0 +1,12 @@
+{"level":"error","message":"Error de validación en /register:  el apellido es requerido, El password es requerido, Expected number, received string"}
+{"level":"error","message":"Error de validación en /register:  el apellido es requerido, El password es requerido, Expected number, received string"}
+{"level":"error","message":"Error de validación en /register:  el apellido es requerido, Expected string, received number, Expected number, received string"}
+{"level":"error","message":"Error de validación en /register:  Expected string, received number, Expected number, received string"}
+{"level":"error","message":"Error de validación en /register:  Expected number, received string"}
+{"level":"error","message":"Error de validación en /register:  Expected date, received string"}
+{"level":"error","message":"Error de servidor: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Error de validación en /register:  El nombre es requerido, el apellido es requerido, El e-mail es requerido, El password es requerido, La edad es requerida"}
+{"level":"error","message":"Error de validación en /register:  El nombre es requerido, el apellido es requerido, El e-mail es requerido, El password es requerido, La edad es requerida"}
+{"level":"error","message":"Error de validación en /register:  El nombre es requerido, el apellido es requerido, El e-mail es requerido, El password es requerido, La edad es requerida"}
+{"level":"error","message":"Error de servidor: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Error de servidor: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"}

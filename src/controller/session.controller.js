@@ -5,6 +5,13 @@ export const register = async (req, res) => {
     const { name, lastName, email, age, password } = req.body
     try {
 
+        // Verificar si el correo electrónico ya está registrado
+        const existingUser = await SessionService.getSessionOne({ email });
+        if (existingUser) {
+            req.logger.info("Error al registrar el usuario, El correo electrónico ya está registrado ")
+            return res.status(400).json({ message: "El correo electrónico ya está registrado" });
+        }
+
         const hashPassword = await createHash(password)
         const NewUser = {
             name,
