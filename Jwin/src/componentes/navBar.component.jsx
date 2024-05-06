@@ -10,33 +10,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.css'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import { Logged_Out } from "../redux/actions/authActions"
-import { useMutation } from '@tanstack/react-query';
-import { logout } from '../api/sessionApi'
-import { useNavigate } from 'react-router-dom'
 
+function NavBar({isLogged, handleLogout}) {
 
-function NavBar() {
-    const isLogged = useSelector(state => state.authReducer.isLogged)
-    const dispatch = useDispatch()
-
-    const logoutAccount = useMutation({
-            mutationFn: logout,
-            onSuccess: (data) => {
-                navigate('/session')
-            }
-    })
-
-    const handleLogout = () => {
-        dispatch(Logged_Out());
-        logoutAccount.mutate()
-    };
-
-    useEffect(() => {
-        console.log(isLogged)
-    }, [isLogged])
     return (
         <>
 

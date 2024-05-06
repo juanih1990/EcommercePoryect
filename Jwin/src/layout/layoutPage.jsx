@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import NavBar from '../componentes/navBar'
+import NavBarContainer from '../containers/navBar.container'
 import store from '../redux/store'
 
 import { Provider } from "react-redux";
@@ -8,7 +8,7 @@ const LayoutPage = () => {
     return (
         <Provider store={store}>
             < div >
-                <nav><NavBar /></nav>
+                <nav><NavBarContainer /></nav>
                 <main><Outlet /></main>
                 <footer></footer>
             </div >
