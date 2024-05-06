@@ -1,14 +1,9 @@
 import LayoutPage from "./layout/layoutPage"
-
 function App() {
   return (
     <>
-       <LayoutPage/>
+      <LayoutPage />
     </>
-    
-
-      
   )
 }
-
 export default App

@@ -14,7 +14,6 @@ const RegisterContainer = () => {
         mutationFn: registerUser,
         onSuccess: (data) => {
                 if (data && typeof data === 'string') { 
-                    console.log(data)
                     Swal.fire({
                      
                         icon: 'error',

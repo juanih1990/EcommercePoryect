@@ -14,7 +14,11 @@ import cors from 'cors'
 const app = express()
 
 //agrego cors 
-app.use(cors())
+app.use(cors({
+    origin: true,
+    credentials: true,
+}));
+
 //para que acepte formato json.
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

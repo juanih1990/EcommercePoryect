@@ -28,11 +28,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/session',
-                element: <Login/>            
+                element: <Login />            
             },
             {
                 path: '/register',
                 element: <Register/>
+            },
+            {
+                path: '/logout',
+                element: <Login/>
             }
         ]
     }
