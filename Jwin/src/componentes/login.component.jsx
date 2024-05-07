@@ -42,7 +42,7 @@ const LoginComponent = ({ onSubmit, errors, register, watch }) => {
 
                 <Button sx={{ mt: 1.5, mb: 1.5 }} variant="contained" fullWidth type="submit">Login</Button>
                 <Box component="div" sx={{ display: 'flex', justifyContent: 'space-between', mt: 1, mb: 1 }}>
-                    <Link to="/#" >
+                    <Link to="/reminder" >
                         <Typography component='span' sx={{ mt: 1, mb: 1, cursor: 'pointer', color: 'blue', textDecoration: 'none' }}>olvide mi contraseña</Typography>
                     </Link>
                     <Link to="/register" >

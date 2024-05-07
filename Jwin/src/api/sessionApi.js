@@ -19,7 +19,6 @@ export const loginUser = async (user) => {
     try {
         const res = await users.post('/login', user)
     } catch (error) {
-        console.log(error.response.data.message)
         return error.response.data.message
     }
 }
@@ -27,6 +26,23 @@ export const loginUser = async (user) => {
 export const logout = async () => {
     try {
         const res = await users.post('/logout')
+    } catch (error) {
+        return error.response.data.message
+    }
+}
+
+export const reminder = async (user) => {
+    try {
+        const res = await users.post('/reminder', user)
+    } catch (error) {
+        return error.response.data.message
+    }
+}
+
+export const updatePass = async (datos) => {
+    try {
+        const res = await users.put('/updatePass',  datos )
+        return res.data
     } catch (error) {
         return error.response.data.message
     }

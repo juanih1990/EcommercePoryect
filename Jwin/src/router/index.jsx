@@ -7,6 +7,8 @@ import Contactanos from '../pages/contactanos'
 import Cart from '../pages/cart'
 import Login from '../pages/login'
 import Register from '../pages/register'
+import Reminder from '../pages/reminder'
+import RecoveryPass from '../pages/recoveryPass'
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +39,14 @@ export const router = createBrowserRouter([
             {
                 path: '/logout',
                 element: <Login/>
+            },
+            {
+                path: '/reminder',
+                element: <Reminder/>
+            },
+            {
+                path: '/recoveryPass',
+                element: <RecoveryPass/>
             }
         ]
     }

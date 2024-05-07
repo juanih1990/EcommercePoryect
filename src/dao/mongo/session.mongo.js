@@ -97,4 +97,16 @@ export default class session {
             console.error('Error al eliminar el campo "cart" del usuario:', error);
         }
     }
+    sessionUpdate = async (id, body) => {
+        try {
+            return sessionModel.findOneAndUpdate(
+                { _id: id },
+                { $set: { password: body } },
+                { new: true }
+            )
+        } catch (error) {
+            console.log("Error M: " + error)
+        }
+
+    }
 }

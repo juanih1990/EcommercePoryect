@@ -20,12 +20,12 @@ export const register = async (req, res) => {
             age,
             password: hashPassword
         }
-        
+
 
         const saveUser = await SessionService.sessionCreate(NewUser)
-        if(!saveUser){
+        if (!saveUser) {
             req.logger.info("Error al registrar el usuario")
-            res.status(400).json({message: "Error al registrar el usuario"})
+            res.status(400).json({ message: "Error al registrar el usuario" })
         }
         const token = await generarToken(saveUser)
         res.cookie('token', token)
@@ -68,8 +68,7 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
     try {
         res.clearCookie('token')
-        console.log("coockie despues " + req.cookies.token)
-        return res.status(200).json({message:"usuario deslogueado"})
+        return res.status(200).json({ message: "usuario deslogueado" })
     }
     catch (error) {
         console.error("Error during logout:", error);
@@ -93,4 +92,40 @@ export const profile = async (req, res, next) => {
     }
 }
 
+export const reminder = async (req, res) => {
+    const { email } = req.body
+    const result = await SessionService.reminder({ email })
+    return res.json({ message: "Revisa tu corre, podras cambiar tu contraseña " })
+}
+
+
+
+export const updatePass = async (req, res) => {
+    try {
+        const currentTime = new Date()
+        const { expirationTime, password, id } = req.body
+
+        // Convertir la hora de expiración del enlace a un objeto de tipo Date
+        const expirationDate = new Date(expirationTime)
+
+        // Verificar si la hora actual es menor que la hora de expiración del enlace
+        if (currentTime < expirationDate) {
+
+            const user = await SessionService.getSessionById(id)
+
+            const isMatch = isValidatePassword(user, password)
+            if (isMatch) return res.status(400).json({ message: 'Error, la contraseña debe ser diferente de la anterior' })
+
+            const passwordHash = await createHash(password)
+            const update = await SessionService.sessionUpdate(id, passwordHash)
+            return res.status(200).json({ message: 'Contraseña actualizada' })
+
+        } else {
+            return res.status(400).json({ message: 'El enlace de restablecimiento de contraseña ha expirado.' })
+        }
+    } catch (error) {
+        console.log("Error: " + error)
+    }
+
+}
 

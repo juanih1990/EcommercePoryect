@@ -11,7 +11,7 @@ const productoDao = new producto()
 const cartDao = new cart()
 const ticketDao = new ticket()
 
-export const SessionService = new SessionRepository(sessionDao)
+export const SessionService = new SessionRepository(sessionDao,mailModule)
 export const ProductoService = new ProductoRepository(productoDao)
 export const CartService = new CartRepository(cartDao)
 export const TicketService = new TicketRepository(ticketDao,mailModule)
