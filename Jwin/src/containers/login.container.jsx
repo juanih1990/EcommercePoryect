@@ -1,16 +1,21 @@
 import { useForm } from "react-hook-form";
 import LoginComponent from "../componentes/login.component";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../api/sessionApi"
+import { loginUser , gmailLogin } from "../api/sessionApi"
 import Swal from "sweetalert2";
 import { logged_in } from "../redux/actions/authActions"
 import { useDispatch } from 'react-redux'
+
+
 
 const LoginContainer = () => {
     const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    
+
+
 
     const accesLogin = useMutation({
         mutationFn: loginUser,
@@ -32,7 +37,7 @@ const LoginContainer = () => {
                 icon: 'error',
                 title: 'Error',
                 text: error.message
-            });
+            })
         }
     })
     const onSubmit = handleSubmit(data => {
@@ -43,6 +48,19 @@ const LoginContainer = () => {
         }
         accesLogin.mutate(formData)
     })
+
+    const gmailQuery  = useQuery({
+        queryKey: ['gmailLogin'],
+        queryFn: gmailLogin,
+        enabled: false
+    })
+
+    const onGoogleLogin = () => {
+        console.log("entro al boton ")
+        gmailQuery.refetch()// Aquí manejas la lógica para la consulta gmailLogin
+    };
+    
+
     return (
         <>
             <LoginComponent
@@ -50,9 +68,9 @@ const LoginContainer = () => {
                 errors={errors}
                 register={register}
                 watch={watch}
+                onGoogleLogin={onGoogleLogin}
             />
         </>
     )
 }
-
 export default LoginContainer

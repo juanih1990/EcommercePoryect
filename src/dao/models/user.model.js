@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    googleId: {
+    passportId: {
         type: String // Para almacenar el ID de Google u otra estrategia de autenticación
     },
     cart: {

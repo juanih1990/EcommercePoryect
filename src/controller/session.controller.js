@@ -128,4 +128,17 @@ export const updatePass = async (req, res) => {
     }
 
 }
+export const google = async (req, res) => {
+    console.log("ENTRO")
+}
 
+export const googlecallback = async (req, res) => {
+    console.log("ENTRO")
+    if (!req.user) {
+       console.log("Error no entro el usuario")
+    }
+    else{
+        console.log(req.user)
+    }
+   // res.cookie('cookieJWT', req.user.token).redirect('/api/products/getProduct')
+}
