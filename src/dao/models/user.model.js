@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema({
         default: Date.now
     },
     passportId: {
-        type: String // Para almacenar el ID de Google u otra estrategia de autenticación
+        type: String ,// Para almacenar el ID de Google u otra estrategia de autenticación
+        default: ''
     },
     cart: {
         type: mongoose.Schema.Types.ObjectId,

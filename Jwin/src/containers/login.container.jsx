@@ -1,19 +1,22 @@
 import { useForm } from "react-hook-form";
 import LoginComponent from "../componentes/login.component";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { loginUser , gmailLogin } from "../api/sessionApi"
+import { loginUser } from "../api/sessionApi"
 import Swal from "sweetalert2";
 import { logged_in } from "../redux/actions/authActions"
+import { is_admin } from '../redux/actions/isAdminAction'
 import { useDispatch } from 'react-redux'
-
-
+import { useAuth0 } from '@auth0/auth0-react'
+import { useState } from "react";
 
 const LoginContainer = () => {
     const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
+    const { user, loginWithRedirect } = useAuth0()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    
+    const [form, setForm] = useState({})
+
 
 
 
@@ -28,6 +31,9 @@ const LoginContainer = () => {
                     text: data
                 });
             } else {
+                if (form.password === 'C0s1pr0nomadic' && form.email === 'cosypro@cosypro.com') {
+                    dispatch(is_admin())
+                }
                 dispatch(logged_in())
                 navigate('/')
             }
@@ -46,20 +52,15 @@ const LoginContainer = () => {
             password: data.Contraseña,
             email: data.Correo,
         }
+        setForm(formData)
         accesLogin.mutate(formData)
     })
 
-    const gmailQuery  = useQuery({
-        queryKey: ['gmailLogin'],
-        queryFn: gmailLogin,
-        enabled: false
-    })
 
     const onGoogleLogin = () => {
-        console.log("entro al boton ")
-        gmailQuery.refetch()// Aquí manejas la lógica para la consulta gmailLogin
+        loginWithRedirect()
     };
-    
+
 
     return (
         <>

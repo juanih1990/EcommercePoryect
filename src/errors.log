@@ -10,3 +10,28 @@
 {"level":"error","message":"Error de validación en /register:  El nombre es requerido, el apellido es requerido, El e-mail es requerido, El password es requerido, La edad es requerida"}
 {"level":"error","message":"Error de servidor: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"}
 {"level":"error","message":"Error de servidor: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Error de validación en /register:  El nombre es requerido, el apellido es requerido, El e-mail es requerido, El password es requerido, La edad es requerida"}
+{"level":"error","message":"Error de validación en /register:  El nombre es requerido, el apellido es requerido, El e-mail es requerido, El password es requerido, La edad es requerida"}
+{"level":"error","message":"Error de validación en /register:  El nombre es requerido, el apellido es requerido, El e-mail es requerido, El password es requerido, La edad es requerida"}
+{"level":"error","message":"Error de validación en /register:  El nombre es requerido, El e-mail es requerido"}
+{"level":"error","message":"Error de servidor: Error: data and salt arguments required"}
+{"level":"error","message":"Error de servidor: Error: data and salt arguments required"}
+{"level":"error","message":"Error de servidor: Error: data and salt arguments required"}
+{"level":"error","message":"Error de servidor: Error: data and salt arguments required"}
+{"level":"error","message":"Error de servidor: Error: data and salt arguments required"}
+{"level":"error","message":"Error de servidor: Error: data and salt arguments required"}
+{"level":"error","message":"Error de servidor: ReferenceError: user is not defined"}
+{"level":"error","message":"Error de servidor: ReferenceError: saveUser is not defined"}
+{"level":"error","message":"Error de servidor: ReferenceError: saveUser is not defined"}
+{"level":"error","message":"Error de servidor: ReferenceError: saveUser is not defined"}
+{"level":"error","message":"Error de servidor: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Error de servidor: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Error de servidor: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Error de servidor: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client"}
+{"level":"error","message":"Error de servidor: TypeError: Cannot read properties of null (reading 'passportId')"}
+{"level":"error","message":"Error de servidor: TypeError: Cannot read properties of null (reading 'passportId')"}
+{"level":"error","message":"Error de servidor: ReferenceError: Cannot access 'userFound' before initialization"}
+{"level":"error","message":"Error de validación en /addProduct:  El maximo de caracteres para la descripcion es de 100, Expected number, received string, Expected number, received string"}
+{"level":"error","message":"Error de validación en /addProduct:  Expected number, received string, Expected number, received string"}
+{"level":"error","message":"Error de validación en /addProduct:  Expected number, received string"}
+{"level":"error","message":"Error de validación en /addProduct:  Expected number, received string"}

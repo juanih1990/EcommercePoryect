@@ -1,32 +1,59 @@
 import { SessionService } from '../services/index.js'
 import { createHash, isValidatePassword, generarToken } from '../utils.js'
-
+import UserDTO from '../dto/user.dto.js'
+import config from '../config/config.js'
 export const register = async (req, res) => {
     const { name, lastName, email, age, password } = req.body
+
     try {
 
         // Verificar si el correo electrónico ya está registrado
-        const existingUser = await SessionService.getSessionOne({ email });
-        if (existingUser) {
-            req.logger.info("Error al registrar el usuario, El correo electrónico ya está registrado ")
-            return res.status(400).json({ message: "El correo electrónico ya está registrado" });
+        let saveUser = {}
+        if (req.body.sub) {
+            const user = new UserDTO(req.body)
+            const existingUser = await SessionService.getSessionOne({ email })
+            if (existingUser) return
+            saveUser = await SessionService.sessionCreate(user)
+        } else {
+            console.log("entro al logueo comun")
+            const existingUser = await SessionService.getSessionOne({ email });
+            if (existingUser) {
+
+                if (existingUser.passportId === '') {
+                    req.logger.info("Error al registrar el usuario, El correo electrónico ya está registrado ")
+                    return res.status(400).json({ message: "El correo electrónico ya está registrado" });
+                }
+                else if (existingUser.passportId != '') {
+                    const hashPassword = await createHash(password)
+                    saveUser = await SessionService.sessionUpdatePasswordAndAge(existingUser._id, hashPassword, age)
+                    if (!saveUser) {
+                        req.logger.info("Error al registrar el usuario")
+                        return res.status(400).json({ message: "Error al registrar el usuario" })
+                    }
+                }
+            }
+
+            else {
+                console.log("Su primer registro")
+                const hashPassword = await createHash(password)
+                const NewUser = {
+                    name,
+                    lastName,
+                    email,
+                    age,
+                    password: hashPassword
+                }
+                saveUser = await SessionService.sessionCreate(NewUser)
+                if (!saveUser) {
+                    req.logger.info("Error al registrar el usuario")
+                    return res.status(400).json({ message: "Error al registrar el usuario" })
+                }
+            }
         }
 
-        const hashPassword = await createHash(password)
-        const NewUser = {
-            name,
-            lastName,
-            email,
-            age,
-            password: hashPassword
-        }
 
 
-        const saveUser = await SessionService.sessionCreate(NewUser)
-        if (!saveUser) {
-            req.logger.info("Error al registrar el usuario")
-            res.status(400).json({ message: "Error al registrar el usuario" })
-        }
+
         const token = await generarToken(saveUser)
         res.cookie('token', token)
         req.logger.info("token: " + token)
@@ -46,7 +73,12 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     const { email, password } = req.body
     try {
-
+        if ( email === config.USER && password === config.PASSWORD) {
+            const userFound = new UserDTO(req.body)
+            const token = await generarToken(userFound)
+            res.cookie('token', token)
+            return res.json({ message: "usuario logueado correctamente" })
+        }
         const userFound = await SessionService.getSessionOne({ email })
 
         if (!userFound) return res.status(400).json({ message: "user not found" })
@@ -67,6 +99,7 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
+        console.log("Entro al logout")
         res.clearCookie('token')
         return res.status(200).json({ message: "usuario deslogueado" })
     }
@@ -127,18 +160,4 @@ export const updatePass = async (req, res) => {
         console.log("Error: " + error)
     }
 
-}
-export const google = async (req, res) => {
-    console.log("ENTRO")
-}
-
-export const googlecallback = async (req, res) => {
-    console.log("ENTRO")
-    if (!req.user) {
-       console.log("Error no entro el usuario")
-    }
-    else{
-        console.log(req.user)
-    }
-   // res.cookie('cookieJWT', req.user.token).redirect('/api/products/getProduct')
 }

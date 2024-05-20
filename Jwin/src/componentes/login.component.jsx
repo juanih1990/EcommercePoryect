@@ -3,29 +3,28 @@ import { Box, Container, Typography, TextField, Button, Link as MuyLink } from '
 import { Link } from 'react-router-dom'
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined'
 import MailIcon from '../assets/gmail_icons.png'
-
-const LoginComponent = ({ onSubmit, errors, register, watch , onGoogleLogin  }) => {
+const LoginComponent = ({ onSubmit, errors, register, watch, onGoogleLogin }) => {
     //En teoria me falta agregar el boton en componentes y en container habilitar un axios.
     ///onGoogleLogin
     return (
         < Container maxWidth="sm" >
             <Box component="form" onSubmit={onSubmit}>
 
-                <Button 
-                startIcon={<img src={MailIcon} alt="Mail Icon" />} 
-                sx={{ mt: 15 }} 
-                variant= 'text'
-                color="primary" 
-                fullWidth 
-                type="button"
-                onClick={onGoogleLogin }
+                <Button
+                    startIcon={<img src={MailIcon} alt="Mail Icon" />}
+                    sx={{ mt: 15 }}
+                    variant='text'
+                    color="primary"
+                    fullWidth
+                    type="button"
+                    onClick={onGoogleLogin}
                 >Continue with google</Button>
 
                 <Box component="div" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Typography component="h2" sx={{ mt: 3 }} > < GroupOutlinedIcon sx={{ fontSize: '3rem', color: '#2196f3' }} /> </Typography>
                 </Box>
 
-                <TextField id="outlined-basic" label="Correo" variant="outlined" fullWidth sx={{ mt: 2.5, mb: 2.5 }}  {...register('Correo', {
+                <TextField id="outlined-basic1" label="Correo" variant="outlined" fullWidth sx={{ mt: 2.5, mb: 2.5 }}  {...register('Correo', {
                     required: {
                         value: true,
                         message: 'El correo es requerido'
@@ -40,7 +39,7 @@ const LoginComponent = ({ onSubmit, errors, register, watch , onGoogleLogin  }) 
                 }
 
 
-                <TextField id="outlined-basic" label="Contraseña" variant="outlined" sx={{ mt: 2.5, mb: 2.5 }} fullWidth  {...register('Contraseña', {
+                <TextField id="outlined-basic2" type='password' label="Contraseña" variant="outlined" sx={{ mt: 2.5, mb: 2.5 }} fullWidth  {...register('Contraseña', {
                     required: {
                         value: true,
                         message: 'La Contraseña es requerida'

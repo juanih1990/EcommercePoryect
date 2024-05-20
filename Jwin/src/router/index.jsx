@@ -9,6 +9,7 @@ import Login from '../pages/login'
 import Register from '../pages/register'
 import Reminder from '../pages/reminder'
 import RecoveryPass from '../pages/recoveryPass'
+import AddProduct from '../pages/addProduct'
 
 export const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
             {
                 path: '/recoveryPass',
                 element: <RecoveryPass/>
+            },
+            {
+                path: '/product/addProduct',
+                element: <AddProduct/>
             }
         ]
     }

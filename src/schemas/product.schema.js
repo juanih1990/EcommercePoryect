@@ -5,8 +5,6 @@ export const productSchema = z.object({
     }),
   description: z.string({
     required_error: "La descripcion del producto es requerida"
-  }).max(100,{
-    message: "El maximo de caracteres para la descripcion es de 100"
   }),
   price: z.number({
     required_error: "El precio es requerido"

@@ -47,14 +47,3 @@ export const updatePass = async (datos) => {
         return error.response.data.message
     }
 }
-
-export const gmailLogin = async () => {
-    try {
-      
-            const res = await users.get('/google')
-            console.log(JSON.stringify(res))
-            return res.data
-    } catch (error) {
-        return error.response.data.message
-    }
-}

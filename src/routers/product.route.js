@@ -9,8 +9,7 @@ router.post('/addProduct',
     verificarToken,
     validateSchema(productSchema),
     addProduct)
-router.get('/getProduct/:limit/:page',
-    verificarToken,
+router.get('/getProduct',
     getProduct)
 router.get('/getProductByid/:id',
     verificarToken,

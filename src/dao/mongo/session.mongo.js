@@ -49,7 +49,18 @@ export default class session {
         }
 
     }
-
+    sessionUpdatePasswordAndAge = async (id, password, age) => {
+        try {
+            return sessionModel.findOneAndUpdate(
+                { _id: id },
+                { $set: { password: password, age: age  , passportId : '' } },
+                { new: true }
+            );
+        } catch (error) {
+            console.log(error);
+            throw error; // Si deseas propagar el error hacia arriba para manejarlo en un lugar diferente
+        }
+    }
     sessionUpdatePassword = async (id, password) => {
         try {
             return sessionModel.findOneAndUpdate(

@@ -8,11 +8,13 @@ import BusinessIcon from '@mui/icons-material/Business';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.css'
+import { useAuth0 } from '@auth0/auth0-react'
 
-function NavBar({isLogged, handleLogout}) {
-
+function NavBar({ isLogged, isAdmin, handleLogout }) {
+    const { isAuthenticated } = useAuth0()
     return (
         <>
 
@@ -40,14 +42,21 @@ function NavBar({isLogged, handleLogout}) {
                             </Typography>
                         </Link>
                     </IconButton>
-                    <Tooltip title="Carrito de compras">
+                    {!isAdmin ? (<Tooltip title="Carrito de compras">
                         <Link to='/cart' className={styles.link} >
                             <IconButton color="inherit">
                                 <ShoppingCartIcon />
                             </IconButton>
                         </Link>
                     </Tooltip>
-                    {isLogged ? (
+                    ) : (<Tooltip title="Agregar Productos">
+                        <Link to='/product/addProduct' className={styles.link} >
+                            <IconButton color="inherit">
+                                <AddBusinessIcon />
+                            </IconButton>
+                        </Link>
+                    </Tooltip>)}
+                    {isLogged || isAuthenticated ? (
 
                         <Tooltip title="Logout">
                             <Link to='/logout' className={styles.link}>

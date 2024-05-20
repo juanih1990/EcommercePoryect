@@ -13,9 +13,9 @@ export default class producto {
             console.log(error)
         }
     }
-    getProductOne = async ( code ) => {
+    getProductOne = async (code) => {
         try {
-            const producto = await productoModel.findOne( code )
+            const producto = await productoModel.findOne(code)
             return producto
         } catch (error) {
             console.log(error)

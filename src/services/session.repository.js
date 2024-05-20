@@ -53,6 +53,13 @@ export default class SessionRepositoyry {
         }
 
     }
+    sessionUpdatePasswordAndAge = async (id, password, age) => {
+        try {
+            return this.sessionDao.sessionUpdatePasswordAndAge(id, password , age)
+        } catch (error) {
+            console.log("Error R: " + error)
+        }
+    }
 
     sessionUpdate = async (id, body) => {
         try {
