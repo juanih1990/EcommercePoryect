@@ -35,3 +35,5 @@
 {"level":"error","message":"Error de validación en /addProduct:  Expected number, received string, Expected number, received string"}
 {"level":"error","message":"Error de validación en /addProduct:  Expected number, received string"}
 {"level":"error","message":"Error de validación en /addProduct:  Expected number, received string"}
+{"level":"error","message":"Error de servidor: RangeError [ERR_HTTP_INVALID_STATUS_CODE]: Invalid status code: { message: 'usuario logueado correctamente' }"}
+{"level":"error","message":"Error de servidor: RangeError [ERR_HTTP_INVALID_STATUS_CODE]: Invalid status code: { message: 'usuario logueado correctamente' }"}

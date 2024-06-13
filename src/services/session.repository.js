@@ -81,8 +81,6 @@ export default class SessionRepositoyry {
 
     sessionUpdateCart = async (id, cart) => {
         try {
-            console.log("id: " + id)
-            console.log("id cart: " + cart)
             return this.sessionDao.sessionUpdateCart(id, cart)
         } catch (error) {
             console.log(error)

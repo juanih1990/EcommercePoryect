@@ -88,8 +88,8 @@ export const login = async (req, res) => {
         if (!isMatch) return res.status(401).json({ message: "inavlid credential" })
 
         const token = await generarToken(userFound)
-        res.cookie('token', token)
-        return res.json({ message: "usuario logueado correctamente" })
+        res.cookie('token', token )
+        return res.json({ message: "usuario logueado correctamente"  , token })
 
     } catch (error) {
         req.logger.error("Error de servidor: " + error)

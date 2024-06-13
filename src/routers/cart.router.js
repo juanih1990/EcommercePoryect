@@ -10,7 +10,7 @@ router.get('/getCart',
 router.get('/getCartByid/:id',
     verificarToken,
     getCartByid)
-router.delete('/deleteCart/:id',
+router.delete('/deleteCart/:cid/:pid',
     verificarToken,
     deleteCart)
 router.put('/updateCart/:cid/:pid',

@@ -34,7 +34,7 @@ const LoginContainer = () => {
                 if (form.password === 'C0s1pr0nomadic' && form.email === 'cosypro@cosypro.com') {
                     dispatch(is_admin())
                 }
-                dispatch(logged_in())
+                dispatch(logged_in(data.token))
                 navigate('/')
             }
         },

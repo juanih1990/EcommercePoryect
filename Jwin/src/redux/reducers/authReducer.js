@@ -1,7 +1,9 @@
 import { LoggedIn, loggedOut } from '../actions/authActions';
+import { getCookie } from '../../utils/utils.cookie';
 
 const initialState = {
-    isLogged: false
+    isLogged: !!getCookie('token'),  // Verifica si el token existe en las cookies
+    token: getCookie('token') || null,  // Obtiene el token de las cookies
 };
 
 const authReducer = (state = initialState, action) => {
@@ -9,12 +11,14 @@ const authReducer = (state = initialState, action) => {
         case LoggedIn:
             return {
                 ...state,
-                isLogged: true
+                isLogged: true,
+                token: action.payload.token,  // Asigna el token al estado
             };
         case loggedOut:
             return {
                 ...state,
-                isLogged: false
+                isLogged: false,
+                token: null,
             };
         default:
             return state;

@@ -18,6 +18,7 @@ export const registerUser = async (user) => {
 export const loginUser = async (user) => {
     try {
         const res = await users.post('/login', user)
+        return res.data
     } catch (error) {
         return error.response.data.message
     }

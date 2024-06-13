@@ -1,11 +1,12 @@
 import cartModel from '../models/cart.model.js'
+import mongoose from 'mongoose'
 
 
 
 export default class Cart {
     getCart = async () => {
         try {
-            const cart = await cartModel.find({ closeBuy: false })
+            const cart = await cartModel.find({ closeBuy: false }).populate('products.pid')
             return cart
         } catch (error) {
             console.log("Error en (mongo) al realizar la busqueda " + error)
@@ -19,22 +20,34 @@ export default class Cart {
             console.log("Error en (mongo) al buscar el carrito " + error)
         }
     }
-    deleteCart = async (id) => {
+    deleteCart = async (cid ,pid) => {
         try {
-            const cart = await cartModel.findByIdAndDelete(id)
-            return cart
+            const objectId = new mongoose.Types.ObjectId(pid)
+            // Actualiza el carrito eliminando el producto con el pid especificado
+            const result = await cartModel.updateOne(
+                { _id: cid },
+                { $pull: { products: { pid: objectId } } }
+            );
+    
+            if (result.nModified > 0) {
+               console.info('Producto eliminado del carrito exitosamente.')
+               return result
+            } else {
+                console.info('Producto no encontrado en el carrito.')
+            }
         } catch (error) {
-            console.log("Error en (mongo) al borrar el carrito " + error)
+            console.error(error);
         }
     }
     updateCart = async (id, pid, cantidad) => {
         try {
             const cartInfo = await cartModel.findById(id)
             const existingProduct = cartInfo.products.find(product => product.pid.toString() === pid)
+          
             if (existingProduct) {
                 const cartUpdate = await cartModel.findOneAndUpdate(
                     { _id: id, 'products.pid': pid },
-                    { $set: { 'products.$.quantity': cantidad } },
+                    { $set: { 'products.$.quantity': existingProduct.quantity  + cantidad } },
                     { new: true }
                 )
                 return cartUpdate
